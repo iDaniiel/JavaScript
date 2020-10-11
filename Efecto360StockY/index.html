@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <style>
+        body {
+            height: 100vh;
+            margin: 0;
+            align-items: center;
+            justify-content: center;
+            display: flex;
+            flex-direction: column;
+        }
+    </style>
+</head>
+<body>
+    <canvas id="canvas-content" height="512" width="768">
+
+    </canvas>
+    <input type="range" min="1" max="36" step="1" value="1"  id="slider"/>
+    <script>
+        const slider = document.querySelector('#slider')
+        const canvas = document.querySelector('#canvas-content')
+        slider.addEventListener('input', handleInputSlider )
+        const ctx = canvas.getContext('2d')
+
+        const images = []
+        window.addEventListener('load', pageLoaded)
+        function pageLoaded(){
+                for(let i = 1; i <= 36; i += 1){
+                const number = i.toString().padStart(2,'00')
+                const url = `https://stockx-360.imgix.net//adidas-Yeezy-Boost-350-V2-Carbon/Images/adidas-Yeezy-Boost-350-V2-Carbon/Lv2/img${number}.jpg?auto=format,compress&w=559&q=90&dpr=2&updated_at=1602176137`
+            
+                const image = new Image()
+                image.src = url
+                image.addEventListener('load', () => {
+                    images[i] = image
+                    if(i === 1){
+                    loadImage(i)
+                    }
+                })
+            }
+        }
+
+        
+        function loadImage(index){
+            ctx.drawImage(images[index], 0, 0, canvas.width, canvas.height)
+        }
+        
+        function handleInputSlider(){
+            loadImage(this.value)
+        }
+
+        console.log(slider)
+    </script>
+</body>
+</html>
