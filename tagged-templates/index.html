@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body{
+            display: flex;
+            margin: 0;
+            height: 100vh;
+            justify-content: center;
+            align-items: center;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+            background-color: #f49097;
+            color: #f2f5ff;
+            font-size: 2em;
+            text-shadow: 1px 1px rgb(0, 0, 0);
+        }
+
+        strong{
+            color: #f5e960;
+            padding: .15em .4em;
+            background: #dfb2f4;
+            border-radius: 20px;
+            border: 2px solid #f2f5dd;
+        }
+    </style>
+</head>
+<body>
+    <p id="parrafo"></p>
+    <!-- <p>El trabajo duro supera al talento natural</p> -->
+    <script>
+        function taggedTemplate(strings, ...dyanmicValues){
+
+            let newContent = '';
+            strings.forEach((string, index) =>{
+                const strong = dyanmicValues[index]? `<strong>${dyanmicValues[index]}</strong>` : '';
+                newContent += `${string} ${strong}`
+            });
+            return newContent;
+        }
+        //Primer parametro que llevan los tagged literals son:
+        //- Strings: array de strings
+        //- Values: param1, param2, etc
+        const html = document.querySelector('#parrafo');
+        html.innerHTML =  taggedTemplate`El ${'trabajo duro'} supera al ${'talento natural'}`
+    </script>
+</body>
+</html>
