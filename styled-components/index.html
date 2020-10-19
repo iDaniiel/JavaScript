@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div id="container"></div>
+    <script>
+        //ReactDOM.render recibe un componente y un container
+        // <MiComponente/>, 'root'
+        function component(strings, ...dynamicValues){
+            return function(props){
+                let newContent = strings.slice()//Guarda una copia en mermoria de los strings
+                console.log(newContent)
+                dynamicValues.forEach((value,index) => {
+                    newContent[index]+= props[value]
+                })
+                return newContent.join('');
+            }
+        }
+        const props ={
+            mensaje: 'No te rindas!',
+            nombre: 'Daniel'
+        }
+        const user = component`-- ${'mensaje'} -- ${'nombre'}`(props)
+
+        function render(componente, container){
+            container.innerHTML = componente
+        }
+
+        render(user, window.container)
+    </script>
+</body>
+</html>
